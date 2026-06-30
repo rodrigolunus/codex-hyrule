@@ -1,6 +1,7 @@
 package org.rodrigolunus.codexhyrule.services;
 
 import org.rodrigolunus.codexhyrule.domain.Categoria;
+import org.rodrigolunus.codexhyrule.dto.CategoriaDTO;
 import org.rodrigolunus.codexhyrule.repositories.CategoriaRepository;
 import org.rodrigolunus.codexhyrule.services.exceptions.DataIntegrityException;
 import org.rodrigolunus.codexhyrule.services.exceptions.ObjectNotFoundException;
@@ -53,5 +54,10 @@ public class CategoriaService {
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repo.findAll(pageRequest);
+    }
+
+    public Categoria fromDTO(CategoriaDTO objDTO) {
+        return new Categoria(objDTO.getId(), objDTO.getNome());
+
     }
 }
